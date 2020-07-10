@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Header, NavBar, Profile, Dialogs } from './components/indexes';
+import { Header, NavBar, Profile } from './components/indexes';
 import { Route, BrowserRouter } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 
@@ -13,12 +14,10 @@ const App = (props) => {
         <Header />
         <NavBar />
         <div className='content'>
-          <Route exact path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
+          <Route exact path='/dialogs' render={() =>
+            <DialogsContainer store={props.store} />} />
           <Route exact path='/profile' render={() =>
-            <Profile
-              profilePage={props.state.profilePage}
-              addPost={props.addPost}
-              updateNewpostText={props.updateNewpostText} />} />
+            <Profile store={props.store} />} />
         </div>
       </div>
     </BrowserRouter>
