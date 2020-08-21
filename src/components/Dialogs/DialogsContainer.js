@@ -1,26 +1,29 @@
-import React from 'react'
-import { NewMessageActionCreator, updateNewMessageActionCreator } from "../redux/reducers/dialogs"
-import Dialogs from './Dialogs'
+import React from 'react';
+import { NewMessageActionCreator, updateNewMessageActionCreator } from "../redux/reducers/dialogs";
+import Dialogs from './Dialogs';
+import { connect } from 'react-redux';
 
-const DialogsContainer = (props) => {
-    const state = props.store.getState().dialogsPage;
 
-    const addPost = () => {
-        props.store.dispatch(NewMessageActionCreator())
+
+const mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage
     }
-
-    const onPostChange = (text) => {
-        props.store.dispatch(updateNewMessageActionCreator(text))
-    }
-
-
-    return (
-        <Dialogs 
-        updateNewMessage={onPostChange} 
-        newMessage={addPost}
-        dialogsPage = {state}
-        />
-    )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateNewMessage: (text) => {dispatch(updateNewMessageActionCreator(text))},
+        newMessage: () => { dispatch(NewMessageActionCreator()) }
+    }
+
+}
+
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+//----контейнерная компонента -----------------------------------презентационная к.
+
+
+
 
 export default DialogsContainer

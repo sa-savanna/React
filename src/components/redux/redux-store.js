@@ -1,18 +1,19 @@
 import profile from './reducers/profile'
 import dialogs from './reducers/dialogs'
 import sidebar from './reducers/sidebar'
-
-
-const { createStore, combineReducers } = require("redux");
+import { createStore, combineReducers } from "redux";
+import usersReducer from './reducers/users';
 
 let reducers = combineReducers({
-    profile,
-    dialogs,
-    sidebar
+    profilePage: profile,
+    dialogsPage: dialogs,
+    sideBar: sidebar,
+    usersPage: usersReducer
 })
 
 
 const store = createStore(reducers)
 
+window.store = store;
 
 export default store

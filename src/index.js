@@ -1,26 +1,25 @@
-import store from './components/redux/redux-store'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+
 import App from './App'
+import store from './components/redux/redux-store'
+import { Provider } from 'react-redux'
 
 
+ReactDOM.render(
+    <BrowserRouter>
 
-const renderAll = (state) => {
+        <Provider store={store}>
+            < App
+            // state={state}
+            // dispatch={store.dispatch.bind(store)}  //bind - привязать к store, теперь внутри addPost - this = store
+            // store={store}
+            />
+        </Provider>
+    </BrowserRouter>,
 
-    ReactDOM.render(
-        < App
-            state={state}
-            dispatch={store.dispatch.bind(store)}  //bind - привязать к store, теперь внутри addPost - this = store
-            store={store}
-        />,
+    document.getElementById('root')
+);
 
-        document.getElementById('root')
-    );
-}
 
-renderAll(store.getState())
-
-store.subscribe(() => {
-    let state = store.getState()
-    renderAll(state)
-})

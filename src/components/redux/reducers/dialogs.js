@@ -15,16 +15,26 @@ let initialState = {
 
 
 const dialogs = (state = initialState, action) => {
+    let stateCopy;
 
     switch (action.type) {
         case ADD_MESSAGE:
-            let newMessage = state.newMessageBody
-            state.messages.push({ id: 5, message: newMessage })
-            state.newMessageBody = ""
-            return state;
+            let body = state.newMessageBody
+
+            return (
+                stateCopy = {
+                    ...state,
+                    newMessageBody: " ",
+                    messages: [...state.messages, { id: 5, message: body }]
+                })
+
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageBody = action.newText;
-            return state;
+            return (
+                stateCopy = {
+                    ...state,
+                    newMessageBody: action.newText
+                })
+
         default: return state;
     }
 
